@@ -21,6 +21,7 @@ const db = mysql.createConnection({
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
+// get all parties
 app.get('/api/party', (req, res) => {
     const sql = `SELECT * FROM parties`;
     db.query(sql, (err, rows) => {
@@ -32,6 +33,7 @@ app.get('/api/party', (req, res) => {
     });
 });
 
+// get a single party
 app.get('/api/party/:id', (req, res) => {
     const sql = `SELECT * FROM parties WHERE id = ?`;
     const params = [req.params.id];
@@ -44,6 +46,7 @@ app.get('/api/party/:id', (req, res) => {
     });
 });
 
+// Delete a party
 app.delete('/api/party/:id', (req, res) => {
     const sql = `DELETE FROM parties WHERE id = ?`;
     const params = [req.params.id];
@@ -78,8 +81,8 @@ app.get('/api/candidates', (req, res) => {
     });
 });
 
+// Get a single candidate
 app.get('/api/candidate/:id', (req, res) => {
-    // Search for specific ID
     const sql =`
         SELECT candidates.*, parties.name AS party_name
         FROM candidates
@@ -116,7 +119,7 @@ app.delete('/api/candidate/:id', (req, res) => {
     });
 });
 
-// Put/Change parties
+// Put/Change candidate party
 app.put('/api/candidate/:id', (req, res) => {
     const sql = `UPDATE candidates SET party_id = ?
         WHERE id = ?`;
@@ -141,7 +144,7 @@ app.put('/api/candidate/:id', (req, res) => {
     })
 });
 
-// Only get the body parameter from request
+// Create a candidate
 app.post('/api/candidate', ({body}, res) => {
     const errors = inputCheck(body, 'first_name', 'last_name', 'industry_connected');
 
