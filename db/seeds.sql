@@ -18,7 +18,7 @@ VALUES
     ('Unica', 'Zurn', NULL, 1);
 
 INSERT INTO voters (first_name, last_name, email)
-VALUE 
+VALUES
     ('James', 'Fraser', 'jf@goldenbough.edu'),
     ('Jack', 'London', 'jlondon@ualaska.edu'),
     ('Robert', 'Bruce', 'rbruce@scotland.net'),
